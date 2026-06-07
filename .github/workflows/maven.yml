@@ -25,7 +25,7 @@ jobs:
 
       - name: SonarQube Analysis
         run: echo "SonarQube analysis would run here"
-      - name: SonarQube Analysis
+      - name: SonarQube2 Analysis
         run: |
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=currency-conversion-service \
