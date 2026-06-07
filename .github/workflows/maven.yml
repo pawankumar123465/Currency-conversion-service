@@ -24,3 +24,5 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: SonarQube Analysis
         run: echo "SonarQube analysis would run here"
+      - name: Pawan Analysis
+          run: echo "Pawan analysis would run here"
