@@ -28,6 +28,9 @@ jobs:
       - name: Verify SONAR_HOST_URL Secret
         run: |
           echo "SONAR_HOST_URL=${{ secrets.SONAR_HOST_URL }}"
+      - name: Pawan key Secret
+        run: |
+          echo "PAWAN=${{ secrets.PAWAN }}"
 
       - name: Verify SONAR_TOKEN Exists
         run: |
