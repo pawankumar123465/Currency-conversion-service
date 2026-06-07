@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -20,21 +21,29 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: Verify SONAR_HOST_URL Secret
+        run: |
+          echo "SONAR_HOST_URL=${{ secrets.SONAR_HOST_URL }}"
+
+      - name: Verify SONAR_TOKEN Exists
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "SONAR_TOKEN is NOT set"
+            exit 1
+          else
+            echo "SONAR_TOKEN is set"
+          fi
+
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean package --file pom.xml
+
+      - name: Test SonarQube URL
+        run: |
+          curl -v "${{ secrets.SONAR_HOST_URL }}" || true
 
       - name: SonarQube Analysis
-        run: echo "SonarQube analysis would run here"
-      - name: Print Sonar URL
-        run: echo "${{ secrets.SONAR_HOST_URL }}"
-      - name: Print Sonar token
-        run: echo "${{ secrets.SONAR_TOKEN }}"
-      - name: SonarQube2 Analysis
         run: |
           mvn clean verify sonar:sonar \
             -Dsonar.projectKey=currency-conversion-service \
-            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-
-      - name: Pawan Analysis
-        run: echo "Pawan analysis would run here"
