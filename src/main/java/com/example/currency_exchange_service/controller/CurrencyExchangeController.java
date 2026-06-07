@@ -24,7 +24,7 @@ public class CurrencyExchangeController
 		CurrencyExchange currencyExchange= currencyExchangeRepository.findByFromAndTo(from, to);
 		String port=env.getProperty("server.port");
 		currencyExchange.setEnv(port);
-		System.out.println("hello");
+		System.out.println("hello   ");
 		return currencyExchange;
 		
 	}
