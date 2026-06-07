@@ -25,6 +25,12 @@ jobs:
 
       - name: SonarQube Analysis
         run: echo "SonarQube analysis would run here"
+      - name: SonarQube Analysis
+        run: |
+          mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=currency-conversion-service \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Pawan Analysis
         run: echo "Pawan analysis would run here"
