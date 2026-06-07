@@ -28,7 +28,7 @@ jobs:
       - name: Print Sonar URL
         run: echo "${{ secrets.SONAR_HOST_URL }}"
       - name: Print Sonar token
-          run: echo "${{ secrets.SONAR_TOKEN }}"
+        run: echo "${{ secrets.SONAR_TOKEN }}"
       - name: SonarQube2 Analysis
         run: |
           mvn clean verify sonar:sonar \
