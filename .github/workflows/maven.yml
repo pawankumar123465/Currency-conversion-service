@@ -7,12 +7,15 @@
 # documentation.
 
 name: Java CI with Maven
-
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+permissions:
+  contents: read
+  dependency-graph: write
+    
 
 jobs:
   build:
